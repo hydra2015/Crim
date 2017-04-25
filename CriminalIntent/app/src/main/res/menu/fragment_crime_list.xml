@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="thhp://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_crime"
+        android:icon="@mipmap/ic_menu_add"
+        android:title="新建事物"
+        app1:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/menu_item_show_subtitle"
+        android:title="事物总数"
+        app1:showAsAction="ifRoom"/>
+
+</menu>

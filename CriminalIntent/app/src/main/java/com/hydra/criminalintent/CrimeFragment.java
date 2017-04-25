@@ -123,7 +123,7 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
-        Date date = ;
+        Date date = mCrime.getDate();
         mDateBtn.setText(date.toString());
     }
 }

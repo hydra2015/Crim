@@ -20,12 +20,17 @@ public class CrimeLab {
     private CrimeLab(Context ctx){
         mCrimes = new ArrayList<>();
        //添加数据
-        for (int i = 0; i < 100; i++){
-            Crime crime = new Crime();
-            crime.setTitle("事件" + i);
-            crime.setSolved(i % 2 == 0 );
-            mCrimes.add(crime);
-        }
+//        for (int i = 0; i < 100; i++){
+//            Crime crime = new Crime();
+//            crime.setTitle("事件" + i);
+//            crime.setSolved(i % 2 == 0 );
+//            mCrimes.add(crime);
+//        }
+    }
+
+    //添加crime
+    public void addCrime(Crime crime){
+        mCrimes.add(crime);
     }
     //获取单例对象
     public static CrimeLab get(Context ctx){
