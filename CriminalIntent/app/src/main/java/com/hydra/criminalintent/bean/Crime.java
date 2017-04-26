@@ -14,6 +14,15 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean isSolved;
+    private String mSuspect;
+
+    public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
+    }
 
     public void setDate(Date date) {
         mDate = date;
