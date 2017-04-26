@@ -126,4 +126,11 @@ public class CrimeFragment extends Fragment {
         Date date = mCrime.getDate();
         mDateBtn.setText(date.toString());
     }
+
+    //只要界面暂停了，就刷新页面，既跳转详情返回时
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
 }

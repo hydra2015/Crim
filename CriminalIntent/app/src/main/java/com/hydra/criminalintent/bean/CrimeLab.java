@@ -2,11 +2,13 @@ package com.hydra.criminalintent.bean;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.hydra.criminalintent.CrimeBaseHelper;
+import com.hydra.criminalintent.CrimeCursorWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,22 @@ public class CrimeLab {
     //获取集合
     public List<Crime> getCrimes() {
 //        return mCrimes;
-        return  new ArrayList<>();
+//        return  new ArrayList<>();
+        List<Crime> crimes = new ArrayList<>();
+    //查询所有数据
+        CrimeCursorWrapper cusor = queryCrimes(null, null);
+//        遍历数据
+        cusor.moveToFirst();
+        try {
+            while (!cusor.isAfterLast()){
+                crimes.add(cusor.getCrime());
+                cusor.moveToNext();
+            }
+        }finally {
+            cusor.close();
+        }
+        return crimes;
+
     }
     //获取对象
     public Crime getCrime(UUID id){
@@ -72,7 +89,18 @@ public class CrimeLab {
 //            }
 //        }
 //        Log.e("事件", "返回空了");
-        return null;
+        CrimeCursorWrapper cursor = queryCrimes(CrimeDbSchema.CrimeTable.Cols.UUID + "= ?" ,
+                new String[] { id.toString()});
+        try {
+            if (cursor.getCount() == 0){
+                return  null;
+            }
+            cursor.moveToFirst();
+            return cursor.getCrime();
+        }finally {
+            cursor.close();
+        }
+
     }
 
     public void updateCrime(Crime crime){
@@ -91,5 +119,29 @@ public class CrimeLab {
         values.put(CrimeDbSchema.CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
 
         return values;
+    }
+
+//    public Cursor query(
+//            String table,
+//            String[] columns,
+//            String where,
+//            String[] whereArgs,
+//            String groupBy,
+//            String having,
+//            String orderBy,
+//            String limit)
+//    查询数据
+//    private Cursor queryCrimes(String whereClause, String [] whereargs){
+    //其实也就省去了新建该类的麻烦
+      private CrimeCursorWrapper queryCrimes(String whereClause, String [] whereargs){
+        Cursor cursor = helper.query(CrimeDbSchema.CrimeTable.NAME,
+                null,
+                whereClause,
+                whereargs,
+                null,
+                null,
+                null
+        );
+        return new CrimeCursorWrapper(cursor);
     }
 }
