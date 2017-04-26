@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.hydra.criminalintent">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="18"/>
+    <!--告诉用户需要用到照相，设置false是若没有拍照功能仍然可以安装-->
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CrimePagerActivity"
-            android:label="@string/app_name"
-            android:parentActivityName=".CrimeListActivity">
+                  android:label="@string/app_name"
+                  android:parentActivityName=".CrimeListActivity">
         </activity>
     </application>
 

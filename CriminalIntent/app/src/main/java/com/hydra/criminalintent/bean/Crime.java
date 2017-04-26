@@ -62,4 +62,9 @@ public class Crime {
     public void setSolved(boolean solved) {
         isSolved = solved;
     }
+
+    //图片文件名
+    public String getPhotoFileName(){
+        return "IMG_" + getId().toString() + ".jpg";
+    }
 }
